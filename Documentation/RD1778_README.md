@@ -22,7 +22,7 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
 # Getting started:
 
 1. Import this example to your local machine with mbed CLI:
-    ``` mbed import https://github.com/ARMmbed/reference-designs.git ```
+    ``` mbed import https://github.com/ARMmbed/reference-design-RD1778.git ```
 
 2. Move into the RD1778 directory ``` cd RD1778 ```
     * Login to your Pelion Cloud account on a browser & follow the steps below:
@@ -39,7 +39,7 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
 5. To build the bootloader to use the SD card: TIP: You may want to use atleast a Class 10, 2GB SD card.
     * Import the bootloader repo - https://github.com/ARMmbed/mbed-bootloader
     * Change main.cpp with:
-    ```c
+    ```
     #if MBED_CLOUD_CLIENT_UPDATE_STORAGE == ARM_UCP_FLASHIAP_BLOCKDEVICE
     	#include "SDBlockDevice.h"
         /* initialise sd card blockdevice */
@@ -51,19 +51,19 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
     ```
     * Modify mbed_app.json in bootloader: Change update storage-address and remove SPI pin defines.
 
-   ```
-"update-client.storage-address"  : "(1024*1024*64)",
-"MTB_USI_WM_BN_BM_22": {
-"flash-start-address"              : "0x08000000",
-"flash-size"                       : "(1024*1024)",
-"sotp-section-1-address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS+768*1024)",
-"sotp-section-1-size"              : "(128*1024)",
-"sotp-section-2-address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS+896*1024)",
-"sotp-section-2-size"              : "(128*1024)",
-"update-client.application-details": "(MBED_CONF_APP_FLASH_START_ADDRESS+64*1024)",
-"application-start-address"        : "(MBED_CONF_APP_FLASH_START_ADDRESS+65*1024)",
-"max-application-size"             : "DEFAULT_MAX_APPLICATION_SIZE",
-}
+    ```
+	"update-client.storage-address"  : "(1024*1024*64)",
+	"MTB_USI_WM_BN_BM_22": {
+	"flash-start-address"              : "0x08000000",
+	"flash-size"                       : "(1024*1024)",
+	"sotp-section-1-address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS+768*1024)",
+	"sotp-section-1-size"              : "(128*1024)",
+	"sotp-section-2-address"           : "(MBED_CONF_APP_FLASH_START_ADDRESS+896*1024)",
+	"sotp-section-2-size"              : "(128*1024)",
+	"update-client.application-details": "(MBED_CONF_APP_FLASH_START_ADDRESS+64*1024)",
+	"application-start-address"        : "(MBED_CONF_APP_FLASH_START_ADDRESS+65*1024)",
+	"max-application-size"             : "DEFAULT_MAX_APPLICATION_SIZE",
+	}
    ```
 
 6. Change mbed_app.json in source:
