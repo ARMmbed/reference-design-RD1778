@@ -24,7 +24,7 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
 1. Import this example to your local machine with mbed CLI:
     ``` mbed import https://github.com/ARMmbed/reference-design-RD1778.git ```
 
-2. Move into the RD1778 directory ``` cd RD1778 ```
+2. Move into the RD1778 directory ``` cd reference-design-RD1778 ```
     * Login to your Pelion Cloud account on a browser & follow the steps below:
         * Navigate to Device identity > Certificates
         * Select the certificate created by your account admin and click on "Download Developer C file"
