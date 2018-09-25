@@ -36,9 +36,9 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
 
 4. The supplied Bootloader in ../tools/ is currently built to use SPI Flash. If you are using the SPI Flash to store the certificates, then you are good to go. If you prefer to use the SD card for the storage, follow the steps below. If not, you may skip these & move to step 11.
 
-5. To build the bootloader to use the SD card: TIP: You may want to use atleast a Class 10, 2GB SD card.
+5. To build the bootloader to use the SD card:  (TIP: You may want to use atleast a Class 10, 2GB SD card.) This application currently uses v3.3.0 of the mbed-bootloader.
     * Import the bootloader repo - https://github.com/ARMmbed/mbed-bootloader
-    * Change main.cpp with:
+    * Change main.cpp in the bootloader with:
     ```
     #if MBED_CLOUD_CLIENT_UPDATE_STORAGE == ARM_UCP_FLASHIAP_BLOCKDEVICE
     	#include "SDBlockDevice.h"
@@ -75,14 +75,16 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
 8. Copy the generated binary to ../tools/ directory. Rename to match the existing file name.
 
 9. Change mbed_app.json in the root of the reference application i.e.
-"update-client.storage-address"  : "(1024*1024*64)"
-10. Change main.cpp in source to match SD card
+``` "update-client.storage-address"  : "(1024*1024*64)", ```
+
+10. Change main.cpp in source to match SD card - i.e. un-comment the respective header include files in main.cpp to include the SD card specific headers while commenting out / removing the ones related to the SPI Flash (SPIFBlockDevice.h and LittleFileSystem.h).
+
 ### IMPORTANT: The required lines are already supplied in the code. Uncomment appropriate lines in main.cpp and build the binary.
 
 11. Combine with the bootloader using the supplied script in ../tools/ .
 ``` $> python tools/combine_bootloader_with_app.py -m MTB_USI_WM_BN_BM_22 -a BUILD/MTB_USI_WM_BN_BM_22/ARM/mbed-cloud-example.bin -o combined.bin ```
 
-12. Flash the combined binary (combined.bin) to your device. Open a terminal & observe the output.
+12. Flash the combined binary (combined.bin) to your device. Open a serial terminal at 115200, 8-N-1 & observe the output.
 
 13. The device starts the example, connects to the WiFi network & after a few moments connects & registers to Pelion Cloud. It then prints out a device ID. You will need this for firmware update at a later stage.
 
@@ -119,7 +121,7 @@ Increase stack size:         "MBED_CONF_APP_MAIN_STACK_SIZE=5120", to 6K if usin
 
 Where mbed cloud API URL is https://api.us-east-1.mbedcloud.com/  . The domain name must have a ".com" as a mandatory requirement and the model ID can be an integer of your choice.
 
-Note the use of `--force` as this option overrides the defaults provided in the application. This is a mandatory parameter.
+### Note the use of `--force` as this option overrides the defaults provided in the application. This is a mandatory parameter.
 
 5. With the certificates initialized, there will now be a ".certificates" directory created within the application's root directory.
 
@@ -146,7 +148,7 @@ Note the use of `--force` as this option overrides the defaults provided in the 
 
 ``` manifest-tool update device -p <payload name> -D <device id> ```
 
-where payload name is the full path to your new binary built from step 13 and device ID is the one obtained from step 9.
+where payload name is the full path to your new binary built from step 13 and device ID is the one obtained from step 10.
 
 15. You will notice from the serial terminal that the device gets a request to update the FW, then this is authorized, then the download of the new FW starts, finishes and the bootloader verifies the authenticity of the new FW, installs it on the device and reboots.
 
