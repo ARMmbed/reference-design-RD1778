@@ -82,7 +82,7 @@ Note: references to Mbed Cloud and Pelion Device Managament are interchangeable.
 ### IMPORTANT: The required lines are already supplied in the code. Uncomment appropriate lines in main.cpp and build the binary.
 
 11. Once you are happy with changes(if any, for the SD card) or you are going with the provided default options, you may now proceed to compile the application binary with the command:
-	``` mbed compile -t GCC_ARM -m MTB_ADV_WISE_1530 ```. 
+	``` mbed compile -t GCC_ARM -m MTB_USI_WM_BN_BM_22 ```. 
 	
  Once the compilation finishes, combine with the bootloader using the supplied script in ../tools/ with the command:
 ``` $> python tools/combine_bootloader_with_app.py -m MTB_USI_WM_BN_BM_22 -a BUILD/MTB_USI_WM_BN_BM_22/ARM/mbed-cloud-example.bin -o combined.bin ```
